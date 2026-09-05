@@ -302,6 +302,9 @@
   .card:hover::before{width:100%}
   .card .chips{margin-top:auto;padding-top:16px}
   .card-links{margin-top:16px;display:flex;gap:18px;font-family:var(--mono);font-size:13px}
+  .more-repos{margin-top:26px;font-family:var(--mono);font-size:13px;color:var(--muted);line-height:2;position:relative;z-index:1}
+  .more-repos a{color:var(--signal);border-bottom:1px solid transparent;transition:border-color .18s}
+  .more-repos a:hover{border-bottom-color:var(--signal)}
   .card-links a{color:var(--signal);border-bottom:1px solid transparent;transition:border-color .18s}
   .card-links a:hover{border-bottom-color:var(--signal)}
   .card-links .off{color:var(--muted)}
@@ -497,7 +500,7 @@
 
 <div class="counters">
   <div class="wrap count-grid">
-    <div class="count gs-reveal"><div class="n"><span data-count="6">0</span><sup>+</sup></div><div class="l">Projets livrés</div></div>
+    <div class="count gs-reveal"><div class="n"><span data-count="10">0</span><sup>+</sup></div><div class="l">Projets livrés</div></div>
     <div class="count gs-reveal"><div class="n"><span data-count="4">0</span></div><div class="l">Expériences pro</div></div>
     <div class="count gs-reveal"><div class="n"><span data-count="12">0</span><sup>+</sup></div><div class="l">Technos en production</div></div>
     <div class="count gs-reveal"><div class="n"><span data-count="2">0</span></div><div class="l">Pays · France &amp; Bénin</div></div>
@@ -515,13 +518,14 @@
 
     <article class="featured gs-reveal" id="flagship">
       <div>
-        <p class="proj-status"><span class="blink" aria-hidden="true"></span> EN PRODUCTION — CODE INTERNE CEA</p>
+        <p class="proj-status">PROJET D'ENTREPRISE — MISSION TERMINÉE</p>
         <h3>EPICS Viewer</h3>
-        <p class="proj-org">CEA / IRFU — Paris-Saclay · stage PEP 2026</p>
+        <p class="proj-org">CEA / IRFU — Paris-Saclay · stage PEP, avril → août 2026</p>
         <p>
-          Application web de supervision temps réel construite seule de bout en bout : elle exploite
-          les flux du système de contrôle-commande <strong>EPICS</strong> pour afficher l'état des
-          équipements du laboratoire en continu.
+          Application web de supervision temps réel conçue et livrée seule de bout en bout, du recueil
+          du besoin à la mise en production : elle exploite les flux du système de contrôle-commande
+          <strong>EPICS</strong> pour afficher l'état des équipements du laboratoire en continu.
+          Livrée en août 2026 au terme du stage, elle tourne aujourd'hui au laboratoire.
         </p>
         <p>
           Front React (Vite, Ant Design, Dockview), API REST Node.js/Express + SQLite,
@@ -532,6 +536,7 @@
           <span class="chip">React</span><span class="chip">Node.js</span><span class="chip">WebSocket</span>
           <span class="chip">SQLite</span><span class="chip alt">Docker</span><span class="chip alt">GitLab CI/CD</span>
         </div>
+        <div class="card-links"><span class="off">Livré au laboratoire en août 2026 · code propriété du CEA, non public</span></div>
       </div>
       <div class="mini-console" aria-hidden="true">
         <div class="mc-bar"><span class="dot"></span><span class="dot a"></span><span class="dot g"></span><span>&nbsp;epics-viewer — monitoring</span></div>
@@ -546,6 +551,38 @@
     </article>
 
     <div class="cards">
+      <article class="card gs-reveal">
+        <h3>Onélé</h3>
+        <p class="proj-org">Projet personnel · en cours</p>
+        <p>Gestion des demandes de congés, de permissions et de matériel sur trois composants : API Laravel, espace d'administration React, application employé Flutter. Une décision prise côté web arrive sur le téléphone de l'employé en quelques dizaines de millisecondes, par canaux WebSocket privés.</p>
+        <div class="chips"><span class="chip">Laravel</span><span class="chip">React</span><span class="chip">Flutter</span><span class="chip alt">WebSocket</span><span class="chip alt">MySQL</span></div>
+        <div class="card-links"><a href="https://github.com/Agbadogbe/onele" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+
+      <article class="card gs-reveal">
+        <h3>API de réservation</h3>
+        <p class="proj-org">Projet personnel</p>
+        <p>API REST de réservation en restaurant : authentification JWT et rôles client/administrateur, disponibilités, politique d'annulation. Base relationnelle et documentaire côte à côte, validation des entrées par schéma, documentation OpenAPI et suite de tests automatisés.</p>
+        <div class="chips"><span class="chip">Express 5</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip alt">Swagger</span><span class="chip alt">Mocha / Chai</span></div>
+        <div class="card-links"><a href="https://github.com/Agbadogbe/restaurant-booking" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+
+      <article class="card gs-reveal">
+        <h3>VitalSync</h3>
+        <p class="proj-org">Projet personnel</p>
+        <p>Application de gestion de données médicales en trois tiers, entièrement conteneurisée : Nginx en reverse proxy, API Node.js, PostgreSQL. Images multi-étapes pour réduire la taille, orchestration Kubernetes et chaîne de tests et de déploiement automatisée par GitHub Actions.</p>
+        <div class="chips"><span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">Nginx</span><span class="chip alt">Docker</span><span class="chip alt">Kubernetes</span><span class="chip alt">GitHub Actions</span></div>
+        <div class="card-links"><a href="https://github.com/Agbadogbe/vitalsync" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+
+      <article class="card gs-reveal">
+        <h3>SafeNote</h3>
+        <p class="proj-org">EFREI · projet d'équipe · sécurité applicative</p>
+        <p>Gestionnaire de notes conçu en « security by design » : JWT et bcrypt, rôles utilisateur et administrateur, HTTPS/TLS, en-têtes HSTS et CSP, limitation du débit et assainissement des entrées contre XSS et injection NoSQL. Audité SonarCloud (note A, zéro vulnérabilité) et scanné à l'OWASP ZAP. Déploiement en conteneurs durcis, base Alpine, exécution sans privilèges.</p>
+        <div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip alt">OWASP ZAP</span><span class="chip alt">SonarCloud</span><span class="chip alt">Docker</span></div>
+        <div class="card-links"><a href="https://github.com/olufemi220/PROJET-FINAL-S-curit-des-applications-web" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/Agbadogbe/mern-stack-dockerization" target="_blank" rel="noopener">Conteneurisation ↗</a></div>
+      </article>
+
       <article class="card gs-reveal">
         <h3>Chat temps réel</h3>
         <p class="proj-org">TICS Master · alternance</p>
@@ -565,9 +602,9 @@
       <article class="card gs-reveal">
         <h3>Plateforme microservices</h3>
         <p class="proj-org">EFREI · projet DevOps en équipe</p>
-        <p>Gestion d'étudiants découpée en microservices polyglottes (Next.js, C#, Java, Node.js), orchestrée avec Kubernetes et livrée par pipeline GitLab.</p>
-        <div class="chips"><span class="chip">Next.js</span><span class="chip">C#</span><span class="chip">Java</span><span class="chip alt">Kubernetes</span><span class="chip alt">Docker</span></div>
-        <div class="card-links"><a href="https://github.com/Agbadogbe" target="_blank" rel="noopener">GitHub ↗</a></div>
+        <p>Gestion d'étudiants répartie sur trois back-ends indépendants — ASP.NET Core en C#, Spring Boot en Java, Express en Node.js — devant une base MySQL commune, avec un front Next.js. Trois environnements, orchestration Docker Compose et manifestes Kubernetes.</p>
+        <div class="chips"><span class="chip">Next.js</span><span class="chip">ASP.NET Core</span><span class="chip">Spring Boot</span><span class="chip">MySQL</span><span class="chip alt">Docker</span><span class="chip alt">Kubernetes</span></div>
+        <div class="card-links"><a href="https://github.com/olufemi220/projet_DevOps" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
 
       <article class="card gs-reveal">
@@ -575,7 +612,7 @@
         <p class="proj-org">Projet personnel</p>
         <p>Site one-page développé et déployé en autonomie : Three.js pour la nappe de données du hero, GSAP + ScrollTrigger pour les animations, Lenis pour l'inertie de scroll, mise en ligne sur GitHub Pages.</p>
         <div class="chips"><span class="chip">Three.js</span><span class="chip">GSAP</span><span class="chip">Lenis</span><span class="chip alt">GitHub Pages</span></div>
-        <div class="card-links"><a href="https://github.com/Agbadogbe" target="_blank" rel="noopener">GitHub ↗</a></div>
+        <div class="card-links"><a href="https://github.com/Agbadogbe/Agbadogbe.github.io" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
 
       <article class="card gs-reveal">
@@ -586,6 +623,14 @@
         <div class="card-links"><a href="https://github.com/Agbadogbe" target="_blank" rel="noopener">GitHub ↗</a></div>
       </article>
     </div>
+
+    <p class="more-repos gs-reveal">
+      Autres dépôts —
+      <a href="https://github.com/Agbadogbe/bookly-hybrid-api" target="_blank" rel="noopener">Bookly, API hybride SQL / NoSQL</a> ·
+      <a href="https://github.com/Agbadogbe/my-secure-api-" target="_blank" rel="noopener">API sécurisée de recettes</a> ·
+      <a href="https://github.com/Agbadogbe/Chat-App" target="_blank" rel="noopener">Chat App conteneurisé</a> ·
+      <a href="https://github.com/Agbadogbe" target="_blank" rel="noopener">tout le profil GitHub ↗</a>
+    </p>
   </div>
 </section>
 
@@ -603,14 +648,15 @@
         <div class="chips">
           <span class="chip hot">React.js</span><span class="chip hot">JavaScript</span><span class="chip hot">TypeScript</span>
           <span class="chip">Next.js</span><span class="chip">Vue.js</span><span class="chip">React Native</span>
-          <span class="chip">HTML5 / CSS3</span><span class="chip">Responsive design</span>
+          <span class="chip">Flutter / Dart</span><span class="chip">HTML5 / CSS3</span><span class="chip">Responsive design</span>
         </div>
       </div>
       <div class="mod gs-reveal">
         <p class="mod-tag">[ BACK-END &amp; API ]</p>
         <div class="chips">
           <span class="chip hot">Node.js</span><span class="chip hot">Express.js</span><span class="chip hot">API REST</span>
-          <span class="chip hot">WebSocket</span><span class="chip">JWT / RBAC</span><span class="chip">Python</span>
+          <span class="chip hot">WebSocket</span><span class="chip">Laravel / PHP</span><span class="chip">Spring Boot / Java</span>
+          <span class="chip">ASP.NET Core / C#</span><span class="chip">JWT / RBAC</span><span class="chip">Python</span>
           <span class="chip">C</span><span class="chip">C++</span>
         </div>
       </div>
@@ -631,8 +677,9 @@
       <div class="mod gs-reveal">
         <p class="mod-tag">[ ARCHITECTURE &amp; SÉCURITÉ ]</p>
         <div class="chips">
-          <span class="chip">Microservices</span><span class="chip">TCP/IP</span><span class="chip">HTTP/S</span>
-          <span class="chip">DNS</span><span class="chip">SSH</span><span class="chip">bcrypt</span>
+          <span class="chip hot">Développement sécurisé</span><span class="chip hot">Audit de sécurité applicative</span>
+          <span class="chip">Tests d'intrusion</span><span class="chip">Microservices</span><span class="chip">TCP/IP</span>
+          <span class="chip">HTTP/S</span><span class="chip">DNS</span><span class="chip">SSH</span><span class="chip">bcrypt</span>
         </div>
       </div>
       <div class="mod gs-reveal">
@@ -676,6 +723,14 @@
           <h3>Bachelor Développeur Web Full Stack</h3>
           <p class="org">EFREI Paris · titre RNCP 39608, niveau 6</p>
           <p>Architecture logicielle, conception full stack, pratiques DevOps et initiation data.</p>
+        </div>
+      </div>
+      <div class="step gs-reveal">
+        <div class="step-card">
+          <p class="stamp">2024.07 → 2025.08</p>
+          <h3>Cybersécurité — audit et conformité</h3>
+          <p class="org">Global IT Service</p>
+          <p>Audits de sécurité applicative sur des plateformes bancaires, assurantielles et publiques dans le cadre de missions PASSI ; déploiement d'un outil de gouvernance et mise en conformité aux référentiels nationaux. Treize mois à chercher la faille dans le code des autres — depuis, je la cherche aussi dans le mien.</p>
         </div>
       </div>
       <div class="step gs-reveal">
