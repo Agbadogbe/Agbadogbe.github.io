@@ -18,6 +18,9 @@
 <link rel="preload" href="fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/newsreader-opsz.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Imhotep Kakpo","jobTitle":"Développeur full stack","url":"https://agbadogbe.github.io/","email":"mailto:imhotepkakpo6@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Vitry-sur-Seine","addressCountry":"FR"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"EFREI Paris"},{"@type":"CollegeOrUniversity","name":"EPITECH"}],"sameAs":["https://github.com/Agbadogbe","https://www.linkedin.com/in/imhotep-kakpo-9a48a5237"]}</script>
+<script src="main.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
@@ -29,7 +32,7 @@
       Imhotep Kakpo
     </a>
     <nav aria-label="Sections du portfolio">
-      <ul class="menu">
+      <ul class="menu" id="menu">
         <li><a href="#projets">Projets</a></li>
         <li><a href="#a-propos">À propos</a></li>
         <li><a href="#competences">Compétences</a></li>
@@ -37,7 +40,17 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <div class="head-tools">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Changer de thème">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
 </header>
 
 <main id="contenu">
@@ -54,6 +67,11 @@
           <a class="btn btn-ghost" href="CV_Imhotep_KAKPO.pdf" download>Télécharger mon CV
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
         </div>
+        <ul class="stats" aria-label="En chiffres">
+          <li><strong data-count="4">4</strong><span>expériences en entreprise</span></li>
+          <li><strong data-count="9">9</strong><span>projets présentés ici</span></li>
+          <li><strong data-count="73">73</strong><span>tests automatisés sur EPICS Viewer</span></li>
+        </ul>
       </div>
 
       <aside class="id-card" aria-labelledby="dispo">
@@ -74,15 +92,23 @@
       <div class="section-head">
         <div>
           <h2 id="projets-titre">Projets</h2>
-          <p>En entreprise, en projet personnel ou à l'école. Filtrez par type de projet.</p>
+          <p>En entreprise, en projet personnel ou à l'école. Filtrez par type, cherchez une technologie, ou cliquez sur une étiquette.</p>
         </div>
-        <ul class="filters" aria-label="Filtrer les projets">
+      </div>
+      <div class="toolbar">
+        <ul class="filters" aria-label="Filtrer les projets par type">
           <li><button type="button" data-filter="tous" aria-pressed="true">Tous</button></li>
           <li><button type="button" data-filter="entreprise" aria-pressed="false">En entreprise</button></li>
           <li><button type="button" data-filter="perso" aria-pressed="false">Personnels</button></li>
           <li><button type="button" data-filter="ecole" aria-pressed="false">À l'école</button></li>
         </ul>
+        <label class="search">
+          <span class="sr-only">Rechercher un projet ou une technologie</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <input type="search" id="proj-search" placeholder="React, Docker, sécurité…" autocomplete="off" spellcheck="false">
+        </label>
       </div>
+      <p class="result-count" id="proj-count" aria-live="polite"></p>
 
       <article class="featured project-item" data-type="entreprise" aria-labelledby="epics">
         <div>
@@ -97,36 +123,50 @@
           <div class="card-links"><a href="epics-viewer.html">Lire l'étude de cas
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
-        <figure>
-<svg class="diag" style="max-width:360px;margin:0 auto" viewBox="0 0 360 470" role="img" aria-labelledby="dg-t2">
+        <figure class="diagram" data-diagram>
+          <svg class="diag" viewBox="0 0 360 440" role="group" aria-labelledby="dg-t2">
             <title id="dg-t2">Architecture d'EPICS Viewer : navigateur, API REST, proxy WebSocket, EPICS</title>
             <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9" fill="none" stroke="currentColor" stroke-width="1.4"/></marker></defs>
-            <rect class="box" x="90" y="8" width="180" height="88"/>
-            <text class="t" x="106" y="36">Navigateur</text>
-            <text class="s" x="106" y="58">React, TypeScript</text>
-            <text class="s" x="106" y="78">Dockview, Ant Design</text>
             <rect class="dash" x="2" y="136" width="356" height="132"/>
             <text class="e" x="352" y="262" text-anchor="end">conteneurs Docker</text>
-            <rect class="box" x="10" y="146" width="164" height="94"/>
-            <text class="t" x="22" y="174">API REST</text>
-            <text class="s" x="22" y="196">Node.js, Express</text>
-            <text class="s" x="22" y="216">SQLite, JWT, rôles</text>
-            <rect class="box hl" x="186" y="146" width="164" height="94"/>
-            <text class="t" x="198" y="174">Proxy WebSocket</text>
-            <text class="s" x="198" y="196">acquisition</text>
-            <text class="s" x="198" y="216">mutualisée</text>
-            <rect class="box" x="186" y="330" width="164" height="94"/>
-            <text class="t" x="198" y="358">EPICS</text>
-            <text class="s" x="198" y="380">contrôle-commande</text>
-            <text class="s" x="198" y="400">du laboratoire</text>
             <path class="ln" d="M140 98 V144" marker-end="url(#ar2)" marker-start="url(#ar2)"/>
             <text class="e" x="102" y="126">HTTP</text>
             <path class="ln" d="M220 98 V144" marker-end="url(#ar2)" marker-start="url(#ar2)"/>
             <text class="e" x="228" y="126">ws</text>
             <path class="ln" d="M268 328 V242" marker-end="url(#ar2)"/>
             <text class="e" x="276" y="292">flux</text>
+            <g class="pkts" aria-hidden="true">
+              <circle class="pkt" r="3.5"><animateMotion dur="1.6s" repeatCount="indefinite" path="M268 326 V244"/></circle>
+              <circle class="pkt" r="3.5"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M268 326 V244"/></circle>
+              <circle class="pkt" r="3.5"><animateMotion dur="1.2s" begin="0.4s" repeatCount="indefinite" path="M220 142 V100"/></circle>
+              <circle class="pkt alt" r="3"><animateMotion dur="2.8s" repeatCount="indefinite" path="M140 102 V140 V102"/></circle>
+            </g>
+            <g class="node" data-node="nav" tabindex="0" role="img" aria-label="Navigateur : React, TypeScript, Dockview, Ant Design" data-title="Navigateur" data-info="Interface React et TypeScript en panneaux Dockview, que chaque utilisateur organise à sa façon.">
+              <rect class="box" x="90" y="8" width="180" height="88"/>
+              <text class="t" x="106" y="36">Navigateur</text>
+              <text class="s" x="106" y="58">React, TypeScript</text>
+              <text class="s" x="106" y="78">Dockview, Ant Design</text>
+            </g>
+            <g class="node" data-node="api" tabindex="0" role="img" aria-label="API REST : Node.js, Express, SQLite, JWT, rôles" data-title="API REST" data-info="Node.js et Express, base SQLite, documentée en OpenAPI. Authentification JWT et contrôle d'accès par rôles.">
+              <rect class="box" x="10" y="146" width="164" height="94"/>
+              <text class="t" x="22" y="174">API REST</text>
+              <text class="s" x="22" y="196">Node.js, Express</text>
+              <text class="s" x="22" y="216">SQLite, JWT, rôles</text>
+            </g>
+            <g class="node" data-node="proxy" tabindex="0" role="img" aria-label="Proxy WebSocket : acquisition mutualisée" data-title="Proxy WebSocket" data-info="Il mutualise l'acquisition des données pour tous les écrans ouverts : les navigateurs ne parlent jamais directement à EPICS.">
+              <rect class="box hl" x="186" y="146" width="164" height="94"/>
+              <text class="t" x="198" y="174">Proxy WebSocket</text>
+              <text class="s" x="198" y="196">acquisition</text>
+              <text class="s" x="198" y="216">mutualisée</text>
+            </g>
+            <g class="node" data-node="epics" tabindex="0" role="img" aria-label="EPICS : contrôle-commande du laboratoire" data-title="EPICS" data-info="Le système de contrôle-commande du laboratoire. Seul le proxy le lit, en continu.">
+              <rect class="box" x="186" y="330" width="164" height="94"/>
+              <text class="t" x="198" y="358">EPICS</text>
+              <text class="s" x="198" y="380">contrôle-commande</text>
+              <text class="s" x="198" y="400">du laboratoire</text>
+            </g>
           </svg>
-          <figcaption>Architecture simplifiée de l'application.</figcaption>
+          <figcaption data-diagram-info>Architecture simplifiée. <span class="hint">Survolez ou sélectionnez un bloc pour le détail.</span></figcaption>
         </figure>
       </article>
 
@@ -194,6 +234,10 @@
           <div class="card-links"><span class="private">Code non public</span></div>
         </li>
       </ul>
+      <div class="empty" id="proj-empty" hidden>
+        <p>Aucun projet ne correspond à cette recherche.</p>
+        <button type="button" class="btn btn-ghost" id="proj-reset">Afficher tous les projets</button>
+      </div>
       <p class="also">Aussi sur GitHub : <a href="https://github.com/Agbadogbe/bookly-hybrid-api">Bookly, API hybride SQL et NoSQL</a>, <a href="https://github.com/Agbadogbe/my-secure-api-">une API sécurisée de recettes</a>, <a href="https://github.com/Agbadogbe/Chat-App">un chat conteneurisé</a> et <a href="https://github.com/Agbadogbe/Agbadogbe.github.io">le code de ce site</a>.</p>
     </div>
   </section>
@@ -221,15 +265,15 @@
   <section class="section" id="competences" aria-labelledby="comp-titre">
     <div class="wrap">
       <div class="section-head">
-        <div><h2 id="comp-titre">Compétences</h2><p>En gras, les outils que j'utilise au quotidien.</p></div>
+        <div><h2 id="comp-titre">Compétences</h2><p>En plein, les outils que j'utilise au quotidien. Cliquez sur une compétence pour voir les projets qui l'utilisent.</p></div>
       </div>
       <dl class="skills">
-        <div><dt>Front-end</dt><dd><strong>React, TypeScript, JavaScript</strong>, Next.js, HTML et CSS, Tailwind, Vue.js, Flutter, React Native</dd></div>
-        <div><dt>Back-end et API</dt><dd><strong>Node.js, Express, API REST</strong>, WebSocket, OpenAPI, Laravel, Spring Boot, ASP.NET Core, Python, C et C++</dd></div>
-        <div><dt>Données</dt><dd><strong>PostgreSQL</strong>, MySQL, MongoDB, SQLite, Redis, Firebase</dd></div>
-        <div><dt>DevOps</dt><dd><strong>Docker, GitLab CI/CD, Git</strong>, GitHub Actions, Kubernetes, Nginx, Linux</dd></div>
-        <div><dt>Sécurité</dt><dd><strong>JWT et contrôle d'accès</strong>, audit applicatif, tests d'intrusion, OWASP, SonarCloud, réseau, HTTP et TLS</dd></div>
-        <div><dt>Qualité et méthode</dt><dd><strong>Tests automatisés</strong>, revue de code, spécifications, documentation, Trello</dd></div>
+        <div><dt>Front-end</dt><dd><ul class="chips"><li class="chip main">React</li><li class="chip main">TypeScript</li><li class="chip main">JavaScript</li><li class="chip">Next.js</li><li class="chip" data-nolink>HTML et CSS</li><li class="chip">Tailwind</li><li class="chip">Vue.js</li><li class="chip">Flutter</li><li class="chip">React Native</li></ul></dd></div>
+        <div><dt>Back-end et API</dt><dd><ul class="chips"><li class="chip main">Node.js</li><li class="chip main">Express</li><li class="chip main" data-tech="API">API REST</li><li class="chip">WebSocket</li><li class="chip">OpenAPI</li><li class="chip">Laravel</li><li class="chip">Spring Boot</li><li class="chip">ASP.NET Core</li><li class="chip" data-nolink>Python</li><li class="chip" data-tech="C++">C et C++</li></ul></dd></div>
+        <div><dt>Données</dt><dd><ul class="chips"><li class="chip main">PostgreSQL</li><li class="chip">MySQL</li><li class="chip">MongoDB</li><li class="chip">SQLite</li><li class="chip">Redis</li><li class="chip">Firebase</li></ul></dd></div>
+        <div><dt>DevOps</dt><dd><ul class="chips"><li class="chip main">Docker</li><li class="chip main">GitLab CI/CD</li><li class="chip main" data-nolink>Git</li><li class="chip">GitHub Actions</li><li class="chip">Kubernetes</li><li class="chip">Nginx</li><li class="chip" data-nolink>Linux</li></ul></dd></div>
+        <div><dt>Sécurité</dt><dd><ul class="chips"><li class="chip main" data-tech="JWT">JWT et contrôle d'accès</li><li class="chip">Audit applicatif</li><li class="chip">Tests d'intrusion</li><li class="chip" data-tech="OWASP">OWASP</li><li class="chip">SonarCloud</li><li class="chip">Réseau, HTTP et TLS</li></ul></dd></div>
+        <div><dt>Qualité et méthode</dt><dd><ul class="chips"><li class="chip main" data-tech="tests">Tests automatisés</li><li class="chip">Revue de code</li><li class="chip" data-nolink>Spécifications</li><li class="chip" data-nolink>Documentation</li><li class="chip">Trello</li></ul></dd></div>
       </dl>
     </div>
   </section>
@@ -271,7 +315,13 @@
       <div class="section-head">
         <div><h2 id="contact-titre">Contact</h2><p>Une alternance, un stage, une question sur un projet : je réponds vite.</p></div>
       </div>
-      <a class="mail" href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">imhotepkakpo6@gmail.com</a>
+      <div class="mail-row">
+        <a class="mail" href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">imhotepkakpo6@gmail.com</a>
+        <button type="button" class="copy" data-copy="imhotepkakpo6@gmail.com" aria-label="Copier l'adresse e-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span class="copy-label">Copier</span>
+        </button>
+      </div>
       <ul class="channels">
         <li><span>Téléphone</span><a href="tel:+33743656987">07 43 65 69 87</a></li>
         <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/imhotep-kakpo-9a48a5237">imhotep-kakpo</a></li>
@@ -285,24 +335,10 @@
 
 <footer class="site-foot">
   <div class="wrap">
-    <span>© 2026 Imhotep Kakpo</span>
+    <span>© 2026 Imhotep Kakpo · Site fait main, sans framework</span>
     <a href="#top">Revenir en haut</a>
   </div>
 </footer>
 
-<script>
-  // Filtre des projets. Sans JavaScript, tous les projets restent visibles.
-  (function () {
-    var buttons = document.querySelectorAll('.filters button');
-    var items = document.querySelectorAll('.project-item');
-    buttons.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var f = b.getAttribute('data-filter');
-        buttons.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-        items.forEach(function (it) { it.hidden = !(f === 'tous' || it.getAttribute('data-type') === f); });
-      });
-    });
-  })();
-</script>
 </body>
 </html>
