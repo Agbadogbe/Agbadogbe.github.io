@@ -3,625 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Imhotep Kakpo | Développeur full stack</title>
-<meta name="description" content="Portfolio d'Imhotep Kakpo, développeur full stack React et Node.js en Mastère à l'EFREI Paris. A livré seul une application de supervision temps réel au CEA. Recherche une alternance (2 semaines en entreprise, 1 semaine à l'école) ou un stage de 6 mois dès janvier 2027 en Île-de-France.">
+<title>Imhotep Kakpo, développeur full stack</title>
+<meta name="description" content="Imhotep Kakpo, développeur full stack React et Node.js en Mastère à l'EFREI Paris. A conçu et livré seul une application de supervision temps réel au CEA. Cherche une alternance ou un stage de 6 mois dès janvier 2027 en Île-de-France.">
 <meta name="author" content="Imhotep Kakpo">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0A0E14" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#F5F6F3" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F2EEE5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191714" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Imhotep Kakpo, développeur full stack">
 <meta property="og:description" content="React, Node.js, Docker, CI/CD. Alternance ou stage de 6 mois dès janvier 2027 en Île-de-France.">
 <meta property="og:type" content="profile">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://agbadogbe.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0E14'/%3E%3Cpath d='M4 19 L10 19 L13 9 L17 24 L20 14 L22 19 L28 19' fill='none' stroke='%2322C55E' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preload" href="fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/space-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-  @font-face{font-family:'Archivo';src:url(fonts/archivo-wdth.woff2) format('woff2-variations'),url(fonts/archivo-wdth.woff2) format('woff2');font-weight:100 900;font-stretch:62% 125%;font-display:swap}
-  @font-face{font-family:'Space Grotesk';src:url(fonts/space-grotesk-400.woff2) format('woff2');font-weight:400;font-display:swap}
-  @font-face{font-family:'Space Grotesk';src:url(fonts/space-grotesk-500.woff2) format('woff2');font-weight:500;font-display:swap}
-  @font-face{font-family:'Space Grotesk';src:url(fonts/space-grotesk-600.woff2) format('woff2');font-weight:600;font-display:swap}
-  @font-face{font-family:'JetBrains Mono';src:url(fonts/jetbrains-mono-400.woff2) format('woff2');font-weight:400;font-display:swap}
-  @font-face{font-family:'JetBrains Mono';src:url(fonts/jetbrains-mono-500.woff2) format('woff2');font-weight:500;font-display:swap}
-
-  /* Design tokens : thème sombre par défaut (salle de supervision), clair si le système le demande */
-  :root{
-    --bg:#0A0E14;
-    --bg-2:#0F151E;
-    --card:#121A25;
-    --card-hi:#172131;
-    --fg:#E8EDF2;
-    --muted:#9AA7B6;
-    --border:#243041;
-    --border-hi:#34445A;
-    --signal:#22C55E;
-    --signal-text:#4ADE80;
-    --signal-soft:rgba(34,197,94,.12);
-    --on-signal:#04140A;
-    --grid:rgba(154,167,182,.07);
-    --display:'Archivo','Arial Narrow',system-ui,sans-serif;
-    --text:'Space Grotesk',system-ui,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    --gutter:clamp(16px,4vw,48px);
-    --max:1240px;
-    --radius:14px;
-    --ease-out:cubic-bezier(.16,1,.3,1);
-  }
-  @media (prefers-color-scheme: light){
-    :root{
-      --bg:#F5F6F3;
-      --bg-2:#ECEEEA;
-      --card:#FFFFFF;
-      --card-hi:#FFFFFF;
-      --fg:#0B1018;
-      --muted:#4A5565;
-      --border:#D5D9DE;
-      --border-hi:#AEB6C0;
-      --signal:#15803D;
-      --signal-text:#166534;
-      --signal-soft:rgba(21,128,61,.10);
-      --on-signal:#FFFFFF;
-      --grid:rgba(11,16,24,.05);
-    }
-  }
-
-  *,*::before,*::after{box-sizing:border-box}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--bg);color:var(--fg);
-    font-family:var(--text);font-size:1.0625rem;line-height:1.6;
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  }
-  a{color:inherit}
-  img,svg{display:block;max-width:100%}
-  ::selection{background:var(--signal);color:var(--on-signal)}
-  :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
-  .skip{position:absolute;left:-9999px;top:8px;background:var(--signal);color:var(--on-signal);padding:10px 14px;z-index:100;border-radius:6px}
-  .skip:focus{left:8px}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
-  .mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.02em}
-  .label{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-
-  /* ---------- progression + nav ---------- */
-  .progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--signal);transform-origin:0 50%;transform:scaleX(0);z-index:60}
-  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);
-    backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);
-    border-bottom:1px solid transparent;transition:border-color .2s}
-  .nav.scrolled{border-bottom-color:var(--border)}
-  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-  .home{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-stretch:112%;font-size:1.02rem;text-decoration:none;letter-spacing:-.01em;min-height:44px}
-  .home svg{width:26px;height:26px}
-  .links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
-  .links a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:var(--muted);font-size:.95rem;border-radius:8px;transition:color .2s,background-color .2s}
-  .links a:hover{color:var(--fg);background:var(--signal-soft)}
-  .links a[aria-current="true"]{color:var(--fg)}
-  .links .cv{color:var(--on-signal);background:var(--signal);font-weight:600;margin-left:10px;padding:0 16px}
-  .links .cv:hover{color:var(--on-signal);background:var(--signal);filter:brightness(1.1)}
-  .menu-btn{display:none;min-height:44px;min-width:44px;padding:0 14px;background:none;border:1px solid var(--border-hi);border-radius:8px;color:var(--fg);font:inherit;cursor:pointer}
-  @media (max-width:800px){
-    .menu-btn{display:inline-flex;align-items:center;gap:8px}
-    .links{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
-      background:var(--bg);border-bottom:1px solid var(--border);padding:8px var(--gutter) 18px;display:none}
-    .links.open{display:flex}
-    .links a{padding:0;font-size:1.05rem;border-radius:0;border-bottom:1px solid var(--border)}
-    .links .cv{margin:14px 0 0;justify-content:center;border-radius:8px;border:0}
-  }
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;padding:clamp(32px,4.5vw,64px) 0 clamp(56px,8vw,96px);overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-    background-size:48px 48px;
-    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 30%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 70% at 30% 30%,#000 30%,transparent 80%)}
-  .hero .wrap{position:relative}
-  .status{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--border-hi);border-radius:999px;background:var(--card);color:var(--fg)}
-  .pulse{position:relative;width:8px;height:8px;border-radius:50%;background:var(--signal)}
-  .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--signal);opacity:0;animation:ping 2.4s var(--ease-out) infinite}
-  @keyframes ping{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.8);opacity:0}}
-  .name{
-    font-family:var(--display);font-weight:800;font-stretch:125%;
-    font-size:clamp(3.4rem,13vw,6.6rem);line-height:.86;letter-spacing:-.045em;
-    margin:26px 0 0;
-  }
-  .name span{display:block;width:max-content;max-width:100%}
-  .name span + span{font-stretch:62%;font-weight:700;letter-spacing:-.025em;line-height:.8;margin-top:.04em;color:var(--signal-text)}
-  .hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:center}
-  .hero-grid .lede{margin-top:clamp(28px,4vw,40px)}
-  .lede{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.4;margin:0;max-width:30ch;font-weight:500}
-  .lede-sub{color:var(--muted);margin:18px 0 0;max-width:56ch}
-  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:10px;cursor:pointer;
-    text-decoration:none;font-weight:600;border:1.5px solid var(--border-hi);transition:background-color .2s,color .2s,border-color .2s,transform .2s var(--ease-out)}
-  .btn svg{width:18px;height:18px;transition:transform .2s var(--ease-out)}
-  .btn:hover svg{transform:translateX(3px)}
-  .btn.primary{background:var(--signal);border-color:var(--signal);color:var(--on-signal)}
-  .btn.primary:hover{filter:brightness(1.08)}
-  .btn.ghost{color:var(--fg)}
-  .btn.ghost:hover{border-color:var(--fg)}
-  .btn:active{transform:scale(.98)}
-
-  /* moniteur de supervision */
-  .monitor{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,0,0,.6)}
-  .monitor-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg-2)}
-  .monitor-bar .dots{display:flex;gap:6px}
-  .monitor-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--border-hi)}
-  .live{display:inline-flex;align-items:center;gap:8px;color:var(--signal-text)}
-  .scope{position:relative;height:150px;border-bottom:1px solid var(--border);
-    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:100% 30px,40px 100%}
-  .scope svg{width:100%;height:100%;color:var(--signal)}
-  .scope .readout{position:absolute;top:10px;right:14px;color:var(--muted)}
-  .scope .readout b{color:var(--fg);font-weight:500}
-  .facts{margin:0}
-  .facts div{display:grid;grid-template-columns:7.5rem 1fr;gap:16px;padding:13px 16px;border-bottom:1px solid var(--border)}
-  .facts div:last-child{border-bottom:0}
-  .facts dt{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-  .facts dd{margin:0}
-  @media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
-  @media (max-width:480px){.facts div{grid-template-columns:1fr;gap:2px}}
-
-  /* ---------- chiffres ---------- */
-  .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .metric{padding:28px clamp(12px,2vw,28px);border-left:1px solid var(--border)}
-  .metric:first-child{border-left:0;padding-left:0}
-  .metric b{display:block;font-family:var(--display);font-weight:700;font-stretch:90%;font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-  .metric span{display:block;margin-top:10px;color:var(--muted);font-size:.95rem;max-width:22ch}
-  @media (max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(3){border-left:0;padding-left:0}.metric:nth-child(n+3){border-top:1px solid var(--border)}}
-
-  /* ---------- sections ---------- */
-  section{scroll-margin-top:72px}
-  .sec{padding:clamp(72px,10vw,136px) 0}
-  .sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,64px);margin-bottom:clamp(36px,5vw,64px);align-items:end}
-  .sec-head .label{display:block;margin-bottom:14px}
-  h2{font-family:var(--display);font-weight:750;font-stretch:112%;font-size:clamp(2.2rem,5.4vw,4rem);line-height:.96;letter-spacing:-.035em;margin:0}
-  .sec-head p{margin:0;color:var(--muted);max-width:52ch}
-  @media (max-width:760px){.sec-head{grid-template-columns:1fr}}
-  h3{font-family:var(--display);font-weight:700;font-stretch:105%;letter-spacing:-.015em;margin:0;line-height:1.15}
-
-  /* projet phare */
-  .feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,64px);
-    background:linear-gradient(180deg,var(--card-hi),var(--card));border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);padding:clamp(24px,4vw,52px);position:relative;overflow:hidden}
-  .feature::after{content:"";position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--signal-soft),transparent 70%);pointer-events:none}
-  .tag{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border-radius:999px;border:1px solid var(--signal);color:var(--signal-text);background:var(--signal-soft)}
-  .feature h3{font-size:clamp(2.2rem,4.6vw,3.6rem);font-stretch:100%;line-height:1;margin-top:18px}
-  .feature .ctx{color:var(--muted);margin:12px 0 24px}
-  .feature p{margin:0 0 16px;max-width:60ch}
-  .feature .note{color:var(--muted);font-size:.95rem;margin-top:22px;padding-left:14px;border-left:2px solid var(--signal)}
-  .spec{margin:0;align-self:start;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:6px 18px;position:relative;z-index:1}
-  .spec div{padding:13px 0;border-bottom:1px dashed var(--border)}
-  .spec div:last-child{border-bottom:0}
-  .spec dt{font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--signal-text)}
-  .spec dd{margin:3px 0 0}
-  @media (max-width:900px){.feature{grid-template-columns:1fr}}
-
-  /* grille de projets */
-  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(18px,2vw,22px)}
-  .card{display:flex;flex-direction:column;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(22px,3vw,30px);
-    transition:border-color .25s,transform .35s var(--ease-out),background-color .25s}
-  .card:hover{border-color:var(--border-hi);transform:translateY(-3px);background:var(--card-hi)}
-  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-  .card h3{font-size:1.5rem}
-  .card .where{display:block;color:var(--muted);font-size:.92rem;margin-top:6px}
-  .card .idx{color:var(--muted)}
-  .card p{margin:0;color:var(--fg)}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:auto 0 0;padding:6px 0 0}
-  .chips li{font-family:var(--mono);font-size:.75rem;padding:4px 9px;border-radius:6px;background:var(--bg-2);border:1px solid var(--border);color:var(--muted)}
-  .card .go{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:600;text-decoration:none;color:var(--signal-text);align-self:flex-start}
-  .card .go svg{width:16px;height:16px;transition:transform .2s var(--ease-out)}
-  .card .go:hover svg{transform:translate(2px,-2px)}
-  .card .go:hover{text-decoration:underline;text-underline-offset:4px}
-  .card .private{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--muted);font-size:.92rem}
-  .card .private svg{width:15px;height:15px}
-  @media (max-width:760px){.grid{grid-template-columns:1fr}}
-  .more{margin:28px 0 0;color:var(--muted)}
-  .more a{color:var(--fg);text-underline-offset:3px;text-decoration-color:var(--signal)}
-
-  /* compétences */
-  .skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
-  .skill{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
-  .skill .label{display:block;margin-bottom:8px}
-  .skill h3{font-size:1.2rem;margin-bottom:16px}
-  .skill ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-  .skill li{padding:5px 11px;border:1px solid var(--border);border-radius:999px;font-size:.93rem;color:var(--muted)}
-  .skill li.daily{border-color:var(--signal);color:var(--fg);background:var(--signal-soft)}
-  .legend{margin:12px 0 0;color:var(--muted);font-size:.95rem;display:flex;align-items:center;gap:8px}
-  .legend i{display:inline-block;width:12px;height:12px;border-radius:4px;border:1px solid var(--signal);background:var(--signal-soft)}
-  @media (max-width:960px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:600px){.skills{grid-template-columns:1fr}}
-
-  /* parcours */
-  .timeline{--tl-gap:clamp(16px,3vw,32px);list-style:none;margin:0;padding:0;position:relative}
-  .timeline::before{content:"";position:absolute;left:calc(11rem + var(--tl-gap) + 7px);top:10px;bottom:10px;width:1px;background:var(--border)}
-  .step{display:grid;grid-template-columns:11rem 16px minmax(0,1fr);gap:0 var(--tl-gap);padding:22px 0}
-  .step time{font-family:var(--mono);font-size:.84rem;color:var(--muted);padding-top:5px;font-variant-numeric:tabular-nums}
-  .step .node{width:15px;height:15px;margin-top:6px;border-radius:50%;background:var(--bg);border:2px solid var(--border-hi);position:relative;z-index:1}
-  .step.now .node{border-color:var(--signal);background:var(--signal);box-shadow:0 0 0 5px var(--signal-soft)}
-  .step.now time{color:var(--signal-text)}
-  .step h3{font-size:1.35rem}
-  .step .org{color:var(--muted);margin:4px 0 8px}
-  .step p{margin:0;max-width:62ch}
-  @media (max-width:680px){
-    .timeline::before{left:7px}
-    .step{grid-template-columns:16px minmax(0,1fr);gap:4px 18px}
-    .step time{grid-column:2;grid-row:1;padding-top:0}
-    .step .node{grid-column:1;grid-row:1 / span 2;margin-top:4px}
-    .step > div{grid-column:2}
-  }
-
-  /* contact */
-  .contact{position:relative;overflow:hidden;border-top:1px solid var(--border);background:var(--bg-2)}
-  .contact::before{content:"";position:absolute;left:50%;bottom:-260px;width:900px;height:520px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,var(--signal-soft),transparent 70%);pointer-events:none}
-  .contact .wrap{position:relative}
-  .mail{font-family:var(--display);font-weight:700;font-stretch:100%;font-size:clamp(1.5rem,5.4vw,4.4rem);letter-spacing:-.03em;line-height:1.05;
-    text-decoration:none;color:var(--fg);display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--signal);overflow-wrap:anywhere;transition:color .2s}
-  .mail:hover{color:var(--signal-text)}
-  .channels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:clamp(40px,6vw,64px) 0 0;padding:0;list-style:none}
-  .channels li{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
-  .channels .label{display:block;margin-bottom:4px}
-  .channels a{display:inline-flex;align-items:center;min-height:32px;color:var(--fg);text-underline-offset:3px;text-decoration-color:var(--signal);overflow-wrap:anywhere}
-  @media (max-width:900px){.channels{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:480px){.channels{grid-template-columns:1fr}}
-  footer{background:var(--bg-2);color:var(--muted);font-size:.9rem}
-  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:22px;padding-bottom:30px;border-top:1px solid var(--border)}
-  footer a{color:inherit;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
-
-  /* ---------- apparitions au défilement (amélioration progressive) ---------- */
-  .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);transition-delay:var(--d,0ms)}
-  .js .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto}
-    .js .reveal{opacity:1;transform:none;transition:none}
-    .pulse::after{animation:none}
-    .card,.btn,.btn svg,.card .go svg{transition:none}
-    .card:hover{transform:none}
-  }
-</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/newsreader-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#main">Aller au contenu</a>
-<div class="progress" id="progress" aria-hidden="true"></div>
-
-<header class="nav" id="nav">
-  <div class="wrap">
-    <a class="home" href="#top" aria-label="Imhotep Kakpo, retour en haut">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor" opacity=".08"/><path d="M4 19 L10 19 L13 9 L17 24 L20 14 L22 19 L28 19" fill="none" stroke="var(--signal)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      Imhotep Kakpo
-    </a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu
-    </button>
-    <ul class="links" id="links">
-      <li><a href="#projets">Projets</a></li>
-      <li><a href="#competences">Compétences</a></li>
-      <li><a href="#parcours">Parcours</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a class="cv" href="CV_Imhotep_KAKPO.pdf" download>Télécharger le CV</a></li>
-    </ul>
-  </div>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="page">
+<header class="top">
+  <a class="mark" href="index.html" aria-label="Imhotep Kakpo, accueil">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.2"/><text x="20" y="26.5" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-style="italic" font-size="19" fill="currentColor">ik</text><circle cx="31" cy="12" r="2.2" fill="var(--red)"/></svg>
+    <span><b>Imhotep Kakpo</b>Développeur full stack</span>
+  </a>
+  <nav aria-label="Navigation principale"><ul>
+    <li><a href="#travaux">Travaux</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="CV_Imhotep_KAKPO.pdf">CV</a></li>
+  </ul></nav>
 </header>
 
-<main id="main">
-  <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <p class="status mono reveal"><span class="pulse" aria-hidden="true"></span>Disponible : alternance ou stage de 6 mois</p>
-          <h1 class="name reveal" id="hero-title" style="--d:80ms"><span>Imhotep</span><span>Kakpo</span></h1>
-          <div class="reveal" style="--d:160ms">
-            <p class="lede">Développeur full stack. Au CEA, j'ai livré seul une application de supervision temps réel, du premier besoin à la mise en production.</p>
-            <p class="lede-sub">Interfaces React et TypeScript, API Node.js, bases de données, Docker et CI/CD. Avant ça, un an d'audit de sécurité applicative : je cherche aussi la faille dans mon propre code. Je suis en Mastère Développeur Manager Full Stack à l'EFREI Paris.</p>
-            <div class="actions">
-              <a class="btn primary" href="#projets">Voir les projets
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-              <a class="btn ghost" href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">Écrire un mail</a>
-            </div>
-          </div>
-        </div>
 
-        <div class="monitor reveal" style="--d:240ms" role="group" aria-label="Disponibilités">
-          <div class="monitor-bar">
-            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="label">disponibilites.live</span>
-            <span class="live mono" aria-hidden="true"><span class="pulse"></span>LIVE</span>
-          </div>
-          <div class="scope" aria-hidden="true">
-            <svg id="trace" viewBox="0 0 600 150" preserveAspectRatio="none">
-              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-            </svg>
-            <span class="readout mono">signal <b id="val">0.00</b></span>
-          </div>
-          <dl class="facts">
-            <div><dt>Je cherche</dt><dd>Une alternance ou un stage de 6&nbsp;mois</dd></div>
-            <div><dt>Alternance</dt><dd>Dès que possible, 2 semaines en entreprise et 1 semaine à l'école, jusqu'en 2028</dd></div>
-            <div><dt>Stage</dt><dd>6&nbsp;mois à partir de janvier 2027</dd></div>
-            <div><dt>Où</dt><dd>Paris et Île-de-France, depuis Vitry-sur-Seine</dd></div>
-          </dl>
-        </div>
+<main id="contenu">
+  <section class="row intro" aria-labelledby="titre">
+    <div class="lab" aria-hidden="true">Vitry-sur-Seine</div>
+    <div>
+      <h1 id="titre">Au CEA, j'ai conçu et livré <em>seul</em> une application de supervision temps réel, du premier besoin à la mise en production.</h1>
+      <div class="avail">
+        <p><strong>Alternance</strong>Dès que possible, deux semaines en entreprise et une à l'école, jusqu'en 2028.</p>
+        <p><strong>Ou stage de six mois</strong>À partir de janvier 2027, à Paris ou en Île-de-France.</p>
       </div>
+      <ul class="links">
+        <li><a class="main" href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">imhotepkakpo6@gmail.com</a></li>
+        <li><a href="CV_Imhotep_KAKPO.pdf">CV en PDF</a></li>
+        <li><a href="https://github.com/Agbadogbe">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/imhotep-kakpo-9a48a5237">LinkedIn</a></li>
+      </ul>
     </div>
   </section>
 
-  <div class="wrap">
-    <div class="metrics" role="list">
-      <div class="metric reveal" role="listitem"><b>73</b><span>tests automatisés sur EPICS Viewer</span></div>
-      <div class="metric reveal" role="listitem" style="--d:80ms"><b>5&nbsp;mois</b><span>au CEA, seul développeur du projet</span></div>
-      <div class="metric reveal" role="listitem" style="--d:160ms"><b>13&nbsp;mois</b><span>d'audit de sécurité applicative</span></div>
-      <div class="metric reveal" role="listitem" style="--d:240ms"><b>Bac+5</b><span>Mastère EFREI Paris, 2026 à 2028</span></div>
+  <section class="row case" id="travaux" aria-labelledby="epics">
+    <div class="lab"><b>01</b>Projet principal</div>
+    <div>
+      <h2 id="epics">EPICS Viewer</h2>
+      <p class="where">CEA, IRFU, Paris-Saclay · stage d'avril à août 2026 · en service au laboratoire</p>
+      <p>Une application web qui lit en continu le système de contrôle-commande EPICS et affiche l'état des équipements du laboratoire. Chaque utilisateur compose son propre écran à partir de panneaux qu'il déplace et redimensionne.</p>
+        <figure>
+          <svg class="diag wide" viewBox="0 0 760 252" role="img" aria-labelledby="dg-t dg-d">
+            <title id="dg-t">Architecture d'EPICS Viewer</title>
+            <desc id="dg-d">Le navigateur parle à l'API REST en HTTP et au proxy WebSocket. Le proxy est le seul à lire le système EPICS du laboratoire. API et proxy tournent dans des conteneurs Docker.</desc>
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9" fill="none" stroke="currentColor" stroke-width="1.4"/></marker></defs>
+            <rect class="dash" x="284" y="6" width="232" height="240"/>
+            <text class="e" x="510" y="241" text-anchor="end">conteneurs Docker</text>
+            <rect class="box" x="18" y="82" width="176" height="96"/>
+            <text class="t" x="34" y="112">Navigateur</text>
+            <text class="s" x="34" y="136">React, TypeScript</text>
+            <text class="s" x="34" y="156">Dockview, Ant Design</text>
+            <rect class="box" x="300" y="20" width="200" height="92"/>
+            <text class="t" x="316" y="50">API REST</text>
+            <text class="s" x="316" y="74">Node.js, Express, SQLite</text>
+            <text class="s" x="316" y="94">JWT, contrôle par rôles</text>
+            <rect class="box hl" x="300" y="138" width="200" height="92"/>
+            <text class="t" x="316" y="168">Proxy WebSocket</text>
+            <text class="s" x="316" y="192">acquisition mutualisée</text>
+            <text class="s" x="316" y="212">pour tous les écrans</text>
+            <rect class="box" x="600" y="138" width="142" height="92"/>
+            <text class="t" x="616" y="168">EPICS</text>
+            <text class="s" x="616" y="192">contrôle-commande</text>
+            <text class="s" x="616" y="212">du laboratoire</text>
+            <path class="ln" d="M194 112 H246 V66 H298" marker-end="url(#ar)" marker-start="url(#ar)"/>
+            <text class="e" x="206" y="104">HTTP</text>
+            <path class="ln" d="M194 150 H246 V184 H298" marker-end="url(#ar)" marker-start="url(#ar)"/>
+            <text class="e" x="252" y="176">ws</text>
+            <path class="ln" d="M598 184 H502" marker-end="url(#ar)"/>
+            <text class="e" x="518" y="176">flux</text>
+          </svg>
+          <svg class="diag tall" viewBox="0 0 360 470" role="img" aria-labelledby="dg-t2">
+            <title id="dg-t2">Architecture d'EPICS Viewer : navigateur, API REST, proxy WebSocket, EPICS</title>
+            <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9" fill="none" stroke="currentColor" stroke-width="1.4"/></marker></defs>
+            <rect class="box" x="90" y="8" width="180" height="88"/>
+            <text class="t" x="106" y="36">Navigateur</text>
+            <text class="s" x="106" y="58">React, TypeScript</text>
+            <text class="s" x="106" y="78">Dockview, Ant Design</text>
+            <rect class="dash" x="2" y="136" width="356" height="132"/>
+            <text class="e" x="352" y="262" text-anchor="end">conteneurs Docker</text>
+            <rect class="box" x="10" y="146" width="164" height="94"/>
+            <text class="t" x="22" y="174">API REST</text>
+            <text class="s" x="22" y="196">Node.js, Express</text>
+            <text class="s" x="22" y="216">SQLite, JWT, rôles</text>
+            <rect class="box hl" x="186" y="146" width="164" height="94"/>
+            <text class="t" x="198" y="174">Proxy WebSocket</text>
+            <text class="s" x="198" y="196">acquisition</text>
+            <text class="s" x="198" y="216">mutualisée</text>
+            <rect class="box" x="186" y="330" width="164" height="94"/>
+            <text class="t" x="198" y="358">EPICS</text>
+            <text class="s" x="198" y="380">contrôle-commande</text>
+            <text class="s" x="198" y="400">du laboratoire</text>
+            <path class="ln" d="M140 98 V144" marker-end="url(#ar2)" marker-start="url(#ar2)"/>
+            <text class="e" x="102" y="126">HTTP</text>
+            <path class="ln" d="M220 98 V144" marker-end="url(#ar2)" marker-start="url(#ar2)"/>
+            <text class="e" x="228" y="126">ws</text>
+            <path class="ln" d="M268 328 V242" marker-end="url(#ar2)"/>
+            <text class="e" x="276" y="292">flux</text>
+          </svg>
+          <figcaption>Schéma simplifié. Les navigateurs ne se connectent pas directement à EPICS : un proxy WebSocket mutualise l’acquisition pour tous les écrans ouverts.</figcaption>
+        </figure>
+
+      <dl class="facts">
+        <dt>Rôle</dt><dd>Seul développeur, du recueil du besoin à la production</dd>
+        <dt>Front</dt><dd>React, TypeScript, Vite, Ant Design, Dockview</dd>
+        <dt>Back</dt><dd>Node.js, Express, SQLite, API documentée en OpenAPI</dd>
+        <dt>Accès</dt><dd>Authentification JWT, contrôle d'accès par rôles</dd>
+        <dt>Livraison</dt><dd>Docker, pipeline GitLab CI/CD refondu, 73 tests automatisés</dd>
+      </dl>
+      <p class="small">Le code appartient au CEA et n'est pas public. L'étude de cas détaille l'architecture et les choix techniques.</p>
+      <a class="more-link" href="epics-viewer.html">Lire l'étude de cas</a>
     </div>
-  </div>
+  </section>
 
-  <section class="sec" id="projets" aria-labelledby="projets-title">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="label">01 / Projets</span><h2 id="projets-title">Projets</h2></div>
-        <p>Des applications qui affichent, trient et protègent des données vivantes, du laboratoire de physique à la plateforme immobilière.</p>
-      </div>
-
-      <article class="feature reveal" aria-labelledby="epics">
-        <div>
-          <span class="tag mono"><span class="pulse" aria-hidden="true"></span>En production</span>
-          <h3 id="epics">EPICS Viewer</h3>
-          <p class="ctx">CEA, IRFU, Paris-Saclay. Stage d'avril à août 2026.</p>
-          <p>Une application web de supervision temps réel, conçue et livrée seul de bout en bout. Elle lit en continu les flux du système de contrôle-commande EPICS et affiche l'état des équipements du laboratoire dans une interface que chaque utilisateur configure.</p>
-          <p>Front React avec Vite, Ant Design et Dockview. API REST Node.js et Express avec SQLite, authentification JWT et contrôle d'accès par rôles. Un proxy WebSocket mutualise l'acquisition. Le tout tourne dans Docker, avec un pipeline GitLab CI/CD et 73 tests automatisés.</p>
-          <p class="note">Livrée en août 2026, elle est utilisée au laboratoire. Le code appartient au CEA et n'est pas public.</p>
-        </div>
-        <dl class="spec">
-          <div><dt>Rôle</dt><dd>Seul développeur, du recueil du besoin à la production</dd></div>
-          <div><dt>Front</dt><dd>React, TypeScript, Vite, Ant Design, Dockview</dd></div>
-          <div><dt>Back</dt><dd>Node.js, Express, SQLite, OpenAPI</dd></div>
-          <div><dt>Temps réel</dt><dd>Proxy WebSocket mutualisé</dd></div>
-          <div><dt>Sécurité</dt><dd>JWT, contrôle d'accès par rôles</dd></div>
-          <div><dt>Livraison</dt><dd>Docker, GitLab CI/CD, 73 tests</dd></div>
-        </dl>
-      </article>
-
-      <div class="grid">
-        <article class="card reveal">
-          <div class="card-top"><div><h3>Onélé</h3><span class="where">Projet personnel, en cours</span></div><span class="idx mono" aria-hidden="true">02</span></div>
+  <section class="row" id="projets" aria-labelledby="projets-titre">
+    <div class="lab"><b>02</b>Autres projets</div>
+    <div>
+      <h2 id="projets-titre" class="sr">Autres projets</h2>
+      <ol class="index">
+        <li><div><h3>Onélé</h3><p class="ctx">Projet personnel, en cours</p>
           <p>Demandes de congés, de permissions et de matériel. Une décision prise sur le web arrive sur le téléphone de l'employé en quelques dizaines de millisecondes, par canaux WebSocket privés.</p>
-          <ul class="chips" aria-label="Technologies"><li>Laravel</li><li>React</li><li>Flutter</li><li>WebSocket</li><li>MySQL</li></ul>
-          <a class="go" href="https://github.com/Agbadogbe/onele">Code sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-        <article class="card reveal" style="--d:80ms">
-          <div class="card-top"><div><h3>API de réservation</h3><span class="where">Projet personnel</span></div><span class="idx mono" aria-hidden="true">03</span></div>
+          <p class="tech">Laravel, React, Flutter, WebSocket, MySQL <a href="https://github.com/Agbadogbe/onele">code</a></p></div></li>
+        <li><div><h3>API de réservation</h3><p class="ctx">Projet personnel</p>
           <p>Réservation en restaurant : rôles client et administrateur, disponibilités, politique d'annulation. Validation par schéma, documentation OpenAPI et tests automatisés.</p>
-          <ul class="chips" aria-label="Technologies"><li>Express 5</li><li>PostgreSQL</li><li>MongoDB</li><li>Swagger</li><li>Mocha</li></ul>
-          <a class="go" href="https://github.com/Agbadogbe/restaurant-booking">Code sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-        <article class="card reveal">
-          <div class="card-top"><div><h3>VitalSync</h3><span class="where">Projet personnel</span></div><span class="idx mono" aria-hidden="true">04</span></div>
+          <p class="tech">Express 5, PostgreSQL, MongoDB, Swagger, Mocha <a href="https://github.com/Agbadogbe/restaurant-booking">code</a></p></div></li>
+        <li><div><h3>VitalSync</h3><p class="ctx">Projet personnel</p>
           <p>Gestion de données médicales en trois tiers, entièrement conteneurisée : Nginx en reverse proxy, API Node.js, PostgreSQL. Images multi-étapes, Kubernetes et déploiement par GitHub Actions.</p>
-          <ul class="chips" aria-label="Technologies"><li>Node.js</li><li>PostgreSQL</li><li>Nginx</li><li>Docker</li><li>Kubernetes</li></ul>
-          <a class="go" href="https://github.com/Agbadogbe/vitalsync">Code sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-        <article class="card reveal" style="--d:80ms">
-          <div class="card-top"><div><h3>SafeNote</h3><span class="where">EFREI, projet d'équipe</span></div><span class="idx mono" aria-hidden="true">05</span></div>
+          <p class="tech">Node.js, PostgreSQL, Nginx, Docker, Kubernetes <a href="https://github.com/Agbadogbe/vitalsync">code</a></p></div></li>
+        <li><div><h3>SafeNote</h3><p class="ctx">EFREI, projet d'équipe</p>
           <p>Notes sécurisées dès la conception : JWT et bcrypt, HTTPS, en-têtes HSTS et CSP, limitation du débit, protection contre XSS et injection NoSQL. Note A sur SonarCloud, scan OWASP ZAP.</p>
-          <ul class="chips" aria-label="Technologies"><li>React</li><li>Node.js</li><li>MongoDB</li><li>OWASP ZAP</li><li>SonarCloud</li></ul>
-          <a class="go" href="https://github.com/olufemi220/PROJET-FINAL-S-curit-des-applications-web">Code sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-        <article class="card reveal">
-          <div class="card-top"><div><h3>Plateforme microservices</h3><span class="where">EFREI, projet DevOps d'équipe</span></div><span class="idx mono" aria-hidden="true">06</span></div>
+          <p class="tech">React, Node.js, MongoDB, OWASP ZAP, SonarCloud <a href="https://github.com/olufemi220/PROJET-FINAL-S-curit-des-applications-web">code</a></p></div></li>
+        <li><div><h3>Plateforme microservices</h3><p class="ctx">EFREI, projet DevOps d'équipe</p>
           <p>Gestion d'étudiants sur trois back-ends indépendants, en C#, Java et Node.js, devant une base MySQL commune et un front Next.js. Docker Compose et Kubernetes.</p>
-          <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>ASP.NET Core</li><li>Spring Boot</li><li>MySQL</li><li>Kubernetes</li></ul>
-          <a class="go" href="https://github.com/olufemi220/projet_DevOps">Code sur GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-        <article class="card reveal" style="--d:80ms">
-          <div class="card-top"><div><h3>Chat temps réel</h3><span class="where">TICS Master, alternance</span></div><span class="idx mono" aria-hidden="true">07</span></div>
+          <p class="tech">Next.js, ASP.NET Core, Spring Boot, MySQL, Kubernetes <a href="https://github.com/olufemi220/projet_DevOps">code</a></p></div></li>
+        <li><div><h3>Chat temps réel</h3><p class="ctx">TICS Master, alternance</p>
           <p>Messagerie instantanée pour la communication interne, interface responsive.</p>
-          <ul class="chips" aria-label="Technologies"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li></ul>
-          <span class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Projet d'entreprise</span>
-        </article>
-        <article class="card reveal">
-          <div class="card-top"><div><h3>ProShare</h3><span class="where">Prosuite Africa, stage</span></div><span class="idx mono" aria-hidden="true">08</span></div>
+          <p class="tech">MongoDB, Express, React, Node.js · projet d'entreprise, code non public</p></div></li>
+        <li><div><h3>ProShare</h3><p class="ctx">Prosuite Africa, stage</p>
           <p>Plateforme immobilière : qualification automatique des leads entrants avec des modèles d'IA, recherche autour de la technologie VDOM.</p>
-          <ul class="chips" aria-label="Technologies"><li>JavaScript</li><li>IA</li><li>VDOM</li></ul>
-          <span class="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Projet d'entreprise</span>
-        </article>
-        <article class="card reveal" style="--d:80ms">
-          <div class="card-top"><div><h3>RayTracer</h3><span class="where">EPITECH, projet d'équipe</span></div><span class="idx mono" aria-hidden="true">09</span></div>
+          <p class="tech">JavaScript, IA, VDOM · projet d'entreprise, code non public</p></div></li>
+        <li><div><h3>RayTracer</h3><p class="ctx">EPITECH, projet d'équipe</p>
           <p>Moteur de rendu 3D en C++ orienté objet : lancer de rayons, matériaux, sources lumineuses. Le projet qui m'a appris à penser performance et architecture.</p>
-          <ul class="chips" aria-label="Technologies"><li>C++</li><li>Programmation orientée objet</li></ul>
-          <a class="go" href="https://github.com/Agbadogbe">Profil GitHub<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </article>
-      </div>
-      <p class="more reveal">Aussi sur GitHub : <a href="https://github.com/Agbadogbe/bookly-hybrid-api">Bookly, API hybride SQL et NoSQL</a>, <a href="https://github.com/Agbadogbe/my-secure-api-">une API sécurisée de recettes</a>, <a href="https://github.com/Agbadogbe/Chat-App">un chat conteneurisé</a> et <a href="https://github.com/Agbadogbe/Agbadogbe.github.io">ce site</a>.</p>
+          <p class="tech">C++, programmation orientée objet</p></div></li>
+      </ol>
+      <p class="small" style="margin-top:22px">Aussi sur GitHub : <a href="https://github.com/Agbadogbe/bookly-hybrid-api">Bookly, API hybride SQL et NoSQL</a>, <a href="https://github.com/Agbadogbe/my-secure-api-">une API sécurisée de recettes</a>, <a href="https://github.com/Agbadogbe/Chat-App">un chat conteneurisé</a> et <a href="https://github.com/Agbadogbe/Agbadogbe.github.io">le code de ce site</a>.</p>
     </div>
   </section>
 
-  <section class="sec" id="competences" aria-labelledby="competences-title" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="label">02 / Compétences</span><h2 id="competences-title">Compétences</h2></div>
-        <div>
-          <p>Les outils avec lesquels je construis, de l'interface à la mise en production.</p>
-          <p class="legend"><i aria-hidden="true"></i>Pratiqués au quotidien</p>
-        </div>
-      </div>
-      <div class="skills">
-        <div class="skill reveal"><span class="label">ui</span><h3>Front-end</h3><ul>
-          <li class="daily">React</li><li class="daily">TypeScript</li><li class="daily">JavaScript</li><li>Next.js</li><li>HTML et CSS</li><li>Tailwind</li><li>Vue.js</li><li>Flutter</li><li>React Native</li>
-        </ul></div>
-        <div class="skill reveal" style="--d:80ms"><span class="label">api</span><h3>Back-end et API</h3><ul>
-          <li class="daily">Node.js</li><li class="daily">Express</li><li class="daily">API REST</li><li>WebSocket</li><li>OpenAPI</li><li>Laravel</li><li>Spring Boot</li><li>ASP.NET Core</li><li>Python</li><li>C et C++</li>
-        </ul></div>
-        <div class="skill reveal" style="--d:160ms"><span class="label">db</span><h3>Données</h3><ul>
-          <li class="daily">PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>SQLite</li><li>Redis</li><li>Firebase</li>
-        </ul></div>
-        <div class="skill reveal"><span class="label">ops</span><h3>DevOps</h3><ul>
-          <li class="daily">Docker</li><li class="daily">GitLab CI/CD</li><li class="daily">Git</li><li>GitHub Actions</li><li>Kubernetes</li><li>Nginx</li><li>Linux</li>
-        </ul></div>
-        <div class="skill reveal" style="--d:80ms"><span class="label">sec</span><h3>Sécurité</h3><ul>
-          <li class="daily">JWT et contrôle d'accès</li><li>Audit applicatif</li><li>Tests d'intrusion</li><li>OWASP</li><li>SonarCloud</li><li>Réseau, HTTP et TLS</li>
-        </ul></div>
-        <div class="skill reveal" style="--d:160ms"><span class="label">qa</span><h3>Qualité et méthode</h3><ul>
-          <li class="daily">Tests automatisés</li><li>Revue de code</li><li>Trello</li><li>Spécifications</li><li>Documentation</li>
-        </ul></div>
-      </div>
+  <section class="row" id="competences" aria-labelledby="comp-titre">
+    <div class="lab"><b>03</b>Compétences</div>
+    <div>
+      <h2 id="comp-titre" class="sr">Compétences</h2>
+      <p class="small">En gras, ce que je pratique au quotidien.</p>
+      <dl class="skills">
+        <div><dt>Front-end</dt><dd><b>React, TypeScript, JavaScript</b>, Next.js, HTML et CSS, Tailwind, Vue.js, Flutter, React Native</dd></div>
+        <div><dt>Back-end et API</dt><dd><b>Node.js, Express, API REST</b>, WebSocket, OpenAPI, Laravel, Spring Boot, ASP.NET Core, Python, C et C++</dd></div>
+        <div><dt>Données</dt><dd><b>PostgreSQL</b>, MySQL, MongoDB, SQLite, Redis, Firebase</dd></div>
+        <div><dt>DevOps</dt><dd><b>Docker, GitLab CI/CD, Git</b>, GitHub Actions, Kubernetes, Nginx, Linux</dd></div>
+        <div><dt>Sécurité</dt><dd><b>JWT et contrôle d'accès</b>, audit applicatif, tests d'intrusion, OWASP, SonarCloud, réseau, HTTP et TLS</dd></div>
+        <div><dt>Qualité et méthode</dt><dd><b>Tests automatisés</b>, revue de code, spécifications, documentation, Trello</dd></div>
+      </dl>
     </div>
   </section>
 
-  <section class="sec" id="parcours" aria-labelledby="parcours-title" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="label">03 / Parcours</span><h2 id="parcours-title">Parcours</h2></div>
-        <p>Du Bénin à Paris : une école d'ingénierie logicielle, un an d'audit de sécurité, puis le développement à plein temps.</p>
-      </div>
-      <ol class="timeline" reversed>
-        <li class="step now reveal">
-          <time datetime="2026-09">2026 à 2028</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Mastère Développeur Manager Full Stack</h3><p class="org">EFREI Paris, titre de niveau 7 (Bac+5)</p>
-          <p>Architecture logicielle, conception full stack et conduite de projet. Je cherche l'entreprise qui m'accueillera en alternance, ou pour un stage de six mois dès janvier 2027.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2026-04">Avril à août 2026</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Développeur full stack</h3><p class="org">CEA, IRFU, Paris-Saclay</p>
-          <p>Conception et livraison d'EPICS Viewer : supervision temps réel, proxy WebSocket, contrôle d'accès par rôles, Docker et GitLab CI/CD dans un laboratoire de recherche.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2025-09">2025 à 2026</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Bachelor Développeur Web Full Stack</h3><p class="org">EFREI Paris, titre RNCP 39608, niveau 6</p>
-          <p>Architecture logicielle, conception full stack, pratiques DevOps et initiation à la data.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2024-07">2024 à 2025</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Cybersécurité, audit et conformité</h3><p class="org">Global IT Service, Cotonou</p>
-          <p>Audits de sécurité applicative de plateformes bancaires, assurantielles et publiques dans le cadre de missions PASSI, puis mise en conformité aux référentiels nationaux. Treize mois à chercher la faille dans le code des autres.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2024-03">Mars à juin 2024</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Stagiaire développeur full stack</h3><p class="org">Prosuite Africa, Cotonou</p>
-          <p>Qualification automatique des leads avec des modèles d'IA sur la plateforme immobilière ProShare, recherche autour de VDOM.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2023-09">2023 à 2024</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Développeur en alternance</h3><p class="org">TICS Master, Cotonou</p>
-          <p>Messagerie temps réel sur une stack MERN pour la communication interne.</p></div>
-        </li>
-        <li class="step reveal">
-          <time datetime="2021-09">2021 à 2024</time><span class="node" aria-hidden="true"></span>
-          <div><h3>Bachelor Technologies de l'Information</h3><p class="org">EPITECH, Cotonou</p>
-          <p>Ingénierie logicielle, cryptographie, réseau, Python, et l'habitude de mener un projet jusqu'au bout.</p></div>
-        </li>
+  <section class="row" id="parcours" aria-labelledby="parc-titre">
+    <div class="lab"><b>04</b>Parcours</div>
+    <div>
+      <h2 id="parc-titre" class="sr">Parcours</h2>
+      <ol class="cv" reversed>
+        <li><time datetime="2026-09">2026 à 2028</time><div><h3>Mastère Développeur Manager Full Stack</h3><p class="org">EFREI Paris, titre de niveau 7 (Bac+5)</p>
+          <p>Architecture logicielle, conception full stack et conduite de projet.</p></div></li>
+        <li><time datetime="2026-04">Avril à août 2026</time><div><h3>Développeur full stack</h3><p class="org">CEA, IRFU, Paris-Saclay</p>
+          <p>Conception et livraison d'EPICS Viewer dans un laboratoire de recherche.</p></div></li>
+        <li><time datetime="2025-09">2025 à 2026</time><div><h3>Bachelor Développeur Web Full Stack</h3><p class="org">EFREI Paris, titre RNCP 39608, niveau 6</p>
+          <p>Architecture logicielle, conception full stack, pratiques DevOps et initiation à la data.</p></div></li>
+        <li><time datetime="2024-07">2024 à 2025</time><div><h3>Cybersécurité, audit et conformité</h3><p class="org">Global IT Service, Cotonou</p>
+          <p>Audits de sécurité applicative de plateformes bancaires, assurantielles et publiques dans le cadre de missions PASSI, puis mise en conformité aux référentiels nationaux. Treize mois à chercher la faille dans le code des autres.</p></div></li>
+        <li><time datetime="2024-03">Mars à juin 2024</time><div><h3>Stagiaire développeur full stack</h3><p class="org">Prosuite Africa, Cotonou</p>
+          <p>Qualification automatique des leads avec des modèles d'IA sur la plateforme immobilière ProShare.</p></div></li>
+        <li><time datetime="2023-09">2023 à 2024</time><div><h3>Développeur en alternance</h3><p class="org">TICS Master, Cotonou</p>
+          <p>Messagerie temps réel sur une stack MERN pour la communication interne.</p></div></li>
+        <li><time datetime="2021-09">2021 à 2024</time><div><h3>Bachelor Technologies de l'Information</h3><p class="org">EPITECH, Cotonou</p>
+          <p>Ingénierie logicielle, cryptographie, réseau, Python, et l'habitude de mener un projet jusqu'au bout.</p></div></li>
       </ol>
     </div>
   </section>
 
-  <section class="sec contact" id="contact" aria-labelledby="contact-title">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="label">04 / Contact</span><h2 id="contact-title">Travaillons ensemble</h2></div>
-        <p>Une alternance, un stage, une question sur EPICS Viewer : j'y réponds vite.</p>
-      </div>
-      <a class="mail reveal" href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">imhotepkakpo6@gmail.com</a>
-      <ul class="channels">
-        <li class="reveal"><span class="label">Téléphone</span><a href="tel:+33743656987">07 43 65 69 87</a></li>
-        <li class="reveal" style="--d:60ms"><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/imhotep-kakpo-9a48a5237">Imhotep Kakpo</a></li>
-        <li class="reveal" style="--d:120ms"><span class="label">GitHub</span><a href="https://github.com/Agbadogbe">github.com/Agbadogbe</a></li>
-        <li class="reveal" style="--d:180ms"><span class="label">Ville</span>Vitry-sur-Seine</li>
-      </ul>
-      <div class="actions reveal">
-        <a class="btn primary" href="CV_Imhotep_KAKPO.pdf" download>Télécharger le CV
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg></a>
-      </div>
+  <section class="row contact" id="contact" aria-labelledby="contact-titre">
+    <div class="lab"><b>05</b>Contact</div>
+    <div>
+      <h2 id="contact-titre" class="big">Une alternance, un stage, une question sur EPICS Viewer : écrivez-moi à <a href="mailto:imhotepkakpo6@gmail.com?subject=Alternance%20ou%20stage">imhotepkakpo6@gmail.com</a>.</h2>
+      <p>Ou par téléphone au <a href="tel:+33743656987">07&nbsp;43&nbsp;65&nbsp;69&nbsp;87</a>. Mon CV est <a href="CV_Imhotep_KAKPO.pdf">téléchargeable en PDF</a>.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <span>© <span id="year">2026</span> Imhotep Kakpo. HTML, CSS et JavaScript, sans framework.</span>
-    <a href="#top">Revenir en haut</a>
-  </div>
+  <span>© 2026 Imhotep Kakpo</span>
+  <a href="https://github.com/Agbadogbe/Agbadogbe.github.io">Code source du site</a>
 </footer>
 
-<script>
-  document.documentElement.classList.add('js');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  // Apparitions au défilement
-  var items = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduce.matches) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
-  } else {
-    items.forEach(function (el) { el.classList.add('in'); });
-  }
-
-  // Oscilloscope du hero : signal qui défile, en pause hors écran ou si le mouvement est réduit
-  (function () {
-    var svg = document.getElementById('trace'), path = svg.querySelector('path'), val = document.getElementById('val');
-    var W = 600, H = 150, N = 150, t0 = 0, visible = true, raf = null;
-    function y(x, t) {
-      var u = x / W * 8 + t;
-      var v = Math.sin(u * 1.7) * 18 + Math.sin(u * 4.3 + 1.1) * 7 + Math.sin(u * 11.2) * 2.5;
-      var k = ((u % 6) + 6) % 6;
-      if (k > 3.6 && k < 4.1) v -= 38 * Math.sin((k - 3.6) / .5 * Math.PI);
-      return H / 2 + v;
-    }
-    function draw(t) {
-      var d = '';
-      for (var i = 0; i <= N; i++) { var x = i / N * W; d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y(x, t).toFixed(1); }
-      path.setAttribute('d', d);
-      val.textContent = ((H / 2 - y(W, t)) / 40).toFixed(2);
-    }
-    function loop(ts) { if (!t0) t0 = ts; draw((ts - t0) / 1400); raf = visible ? requestAnimationFrame(loop) : null; }
-    draw(0.6);
-    if (reduce.matches) return;
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); }).observe(svg);
-    }
-    document.addEventListener('visibilitychange', function () { visible = !document.hidden; if (visible && !raf) raf = requestAnimationFrame(loop); });
-    raf = requestAnimationFrame(loop);
-  })();
-
-  // Nom : la ligne condensée prend la largeur de la ligne large
-  (function () {
-    var h = document.querySelector('.name'), a = h.children[0], b = h.children[1];
-    function fit() {
-      b.style.fontSize = '';
-      var r = a.getBoundingClientRect().width / b.getBoundingClientRect().width;
-      if (r > 0 && isFinite(r)) b.style.fontSize = Math.min(r, 2.4) + 'em';
-    }
-    fit();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-    window.addEventListener('resize', fit);
-  })();
-
-  // Menu mobile
-  var btn = document.getElementById('menuBtn'), links = document.getElementById('links');
-  btn.addEventListener('click', function () {
-    var open = links.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open);
-  });
-  links.addEventListener('click', function (e) {
-    if (e.target.closest('a')) { links.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && links.classList.contains('open')) { links.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
-  });
-
-  // Barre de progression, filet de la nav et lien de section actif
-  var nav = document.getElementById('nav'), bar = document.getElementById('progress');
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
-  var ticking = false;
-  function onScroll() {
-    var max = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = 'scaleX(' + (max > 0 ? scrollY / max : 0) + ')';
-    nav.classList.toggle('scrolled', scrollY > 8);
-    var cur = null;
-    navLinks.forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s && s.getBoundingClientRect().top < innerHeight * .4) cur = a; });
-    navLinks.forEach(function (a) { if (a === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-    ticking = false;
-  }
-  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  onScroll();
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+</div>
 </body>
 </html>
